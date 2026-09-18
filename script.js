@@ -28,7 +28,13 @@ function addProduct() {
     const price = priceInput.value
     const quantity = Number(quantityInput.value)
 
-    if (!productName.trim() || !category.trim()) return
+    if (!productName.trim() || 
+        !category ||
+        !price ||
+        !quantity
+    ) {
+        return
+    }
 
     if (edit !== null) {
         const foundProduct = products.find(product => {
@@ -84,7 +90,7 @@ function getProductHtml(productArray) {
 
                         <div class="product-details">
                             <p>Category: ${product.category}</p>
-                            <p>Price: ₵${product.price.toLocaleString()}</p>
+                            <p>Price: ₵${Number(product.price).toLocaleString()}</p>
                             <p>Quantity: ${product.quantity}</p>
                         </div>
 
