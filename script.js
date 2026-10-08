@@ -1,3 +1,4 @@
+const productForm = document.getElementById("product-form")
 const productInput = document.getElementById("product")
 const categoryInput = document.getElementById("category")
 const priceInput = document.getElementById("price")
@@ -15,7 +16,7 @@ const lowStockEl = document.getElementById("low-stock")
 let products = JSON.parse(localStorage.getItem("products")) || []
 
 
-addBtn.addEventListener("click", addProduct)
+productForm.addEventListener("submit", addProduct)
 
 productList.addEventListener("click", function(e) {
     if (e.target.classList.contains("edit-btn")) {
@@ -34,7 +35,9 @@ searchInput.addEventListener("input", searchProduct)
 categoryFilter.addEventListener("change", filterByCategory)
 
 
-function addProduct() {
+function addProduct(e) {
+    e.preventDefault()
+
     const productName = productInput.value
     const category = categoryInput.value
     const price = priceInput.value
