@@ -17,6 +17,18 @@ let products = JSON.parse(localStorage.getItem("products")) || []
 
 addBtn.addEventListener("click", addProduct)
 
+productList.addEventListener("click", function(e) {
+    if (e.target.classList.contains("edit-btn")) {
+        const id = Number(e.target.dataset.id)
+        editProduct(id)
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+        const id = Number(e.target.dataset.id)
+        deleteProduct(id)
+    }
+})
+
 searchInput.addEventListener("input", searchProduct)
 
 categoryFilter.addEventListener("change", filterByCategory)
@@ -98,8 +110,8 @@ function getProductHtml(productArray) {
                     </div>
 
                     <div class="product-actions">
-                        <button onclick="editProduct(${product.id})">Edit</button>
-                        <button onclick="deleteProduct(${product.id})">Delete</button>
+                        <button class="edit-btn" data-id="${product.id}">Edit</button>
+                        <button class="delete-btn" data-id="${product.id}">Delete</button>
                     </div>
 
                 </div>
@@ -140,7 +152,6 @@ function editProduct(id) {
     quantityInput.value = foundProduct.quantity
 
     edit = id
-
 }
 
 
